@@ -1,0 +1,45 @@
+{{>head}}
+{{>navbar}}
+
+<div class="row">
+    <div class="col-12">
+
+        <div class="card-box">
+            <form action="informasi/{{data.id}}?_method=PUT" method="post">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="judul">Judul<span class="text-danger">*</span></label>
+                            <input type="text" name="judul" value="{{data.judul}}" parsley-trigger="change" required placeholder="Enter judul"
+                                class="form-control" id="judul">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <label for="judul">Keterangan<span class="text-danger">*</span></label>
+                        <textarea class="summernote" required class="form-control" name="keterangan">
+                            {{data.keterangan}}
+                    </textarea>
+                    </div>
+                </div>
+                <br>
+
+                <div class="form-group text-right m-b-0">
+                    <button class="btn btn-primary waves-effect waves-light" value="simpan" type="submit">
+                        Submit
+                    </button>
+                    <a href="/informasi" class="btn btn-secondary delete">Cancel</a>
+                   
+                </div>
+
+            </form>
+        </div> <!-- end card-box -->
+    </div>
+
+</div>
+<!-- end col -->
+
+</div>
+{{>footer}}

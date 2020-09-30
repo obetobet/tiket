@@ -1,0 +1,50 @@
+{{>head}}
+{{>navbar}}
+
+  <div class="row">
+                            <div class="col-12">
+                                <div class="card-box table-responsive">
+                                  
+                                    <p class="text-muted font-13 m-b-40" style="margin-left:15px">
+                                           <a href="http://localhost:3000/informasi/create" class="btn btn-sm btn-success ">Add new</a>
+                                    </p>
+
+                                    <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Judul</th>
+                                            <th>Keterangan</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                        </thead>
+
+
+                                        <tbody>
+                                            {{!-- {{@index = 1}} --}}
+                                            {{#each data}}
+                                        <tr>
+                                            <td>{{ @index }}</td>
+                                            <td>{{ judul }}</td>
+                                            <td style="max-width:200px">{{ keterangan }}</td>
+                                            <td>
+                                                <center>
+                                                <a href="/informasi/{{id}}/edit" class="btn btn-sm btn-info edit" >Edit</a>
+                                    
+                                                <a href="javascript:void(0);" class="btn btn-sm btn-danger delete">Delete</a>
+                
+                                                
+                                                </center>
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                        
+                        </div>
+{{>footer}}

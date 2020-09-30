@@ -1,0 +1,149 @@
+{{>head}}
+{{>navbar}}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-box table-responsive">
+
+            <button style="margin-left:15px" class="btn btn-primary btn-rounded btn-bordered waves-effect w-md waves-light" data-toggle="modal" data-target="#myModalAdd">Add New</button><br><br>
+            <table id="mytable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each data}}
+                    
+                    <tr>
+                        <td>{{ id }}</td>
+                        <td>{{ nama }}</td>
+                        <td>
+                            <center>
+                                 <button type="button" class="btn btn-icon waves-effect waves-light btn-warning edit" data-id="{{ id }}"
+                                    data-nama="{{ nama }}" > <i class="fa fa-wrench"></i> </button>
+                                  <button type="button" class="btn btn-icon waves-effect waves-light btn-danger delete" data-nama="{{ nama }}" data-id="{{ id }}"> <i class="fa fa-remove"></i> </button>
+                            </center>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+<!-- Add New Product Modal-->
+<form action="master_tiket/store_Master_tiket" method="post">
+    <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Category Tiket</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" name="nama" class="form-control" placeholder="Tiket Name" required>
+                    </div>
+
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-bordered waves-effect " data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-bordered waves-effect  waves-light">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Edit Product Modal-->
+<form action="master_tiket/edit_Master_tiket" method="post">
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Tiket</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" name="nama" class="form-control nama"
+                            placeholder="Tiket Name" required>
+                    </div>
+
+                    
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id" class="id_tiket">
+                    <button type="button" class="btn btn-secondary btn-bordered waves-effect " data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-bordered waves-effect  waves-light">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<!-- Delete Product Modal-->
+<form id="add-row-form" action="master_tiket/delete_Master_tiket" method="post">
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Delete {{id}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <strong>Are You Sure To Delete This Data?</strong>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id_tiket" class="form-control id_tiket" required>
+                    <button type="button" class="btn btn-secondary btn-bordered waves-effect " data-dismiss="modal">Close</button>
+                     <button type="submit" class="btn btn-danger btn-bordered waves-effect  waves-light">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+
+
+        $('#mytable').DataTable();
+
+        //showing data to modal for edit record
+        $('#mytable').on('click', '.edit', function () {
+            var id = $(this).data('id');
+            var nama = $(this).data('nama');
+            $('#EditModal').modal('show');
+            $('.nama').val(nama);
+            $('.id_tiket').val(id);
+        });
+        //showing modal for delete record
+        $('#mytable').on('click', '.delete', function () {
+            var id = $(this).data('id');
+            var nama = $(this).data('nama');
+            $('#DeleteModal').modal('show');
+            $('.id_tiket').val(id);
+            $('#myModalLabel').html('Delete : ' + nama);
+        });
+
+    });
+</script>
+{{>footer}}
