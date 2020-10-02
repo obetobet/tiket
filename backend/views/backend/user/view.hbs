@@ -1,0 +1,270 @@
+{{>head}}
+{{>navbar}}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-box table-responsive">
+
+            <button style="margin-left:15px" class="btn btn-primary btn-rounded btn-bordered waves-effect w-md waves-light" data-toggle="modal" data-target="#myModalAdd">Add New</button><br><br>
+            <table id="mytable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>No_telp</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each data}}
+                    
+                    <tr>
+                        <td>{{ id }}</td>
+                        <td>{{ nama }}</td>
+                        <td>{{ email }}</td>
+                        <td>{{ no_telp }}</td>
+                        <td>{{ role }}</td>
+                        <td>{{ status }}</td>
+                        <td>
+                            <center>
+                                 <button type="button" class="btn btn-icon waves-effect waves-light btn-warning edit" data-id="{{ id }}"
+                                    data-nama="{{ nama }}" data-email="{{ email }}" data-no_telp="{{ no_telp }}" data-role="{{ role }}" data-status="{{ status }}"
+                                    data-tanggal_lahir="{{ tanggal_lahir }}" data-jenis_kelamin="{{ jenis_kelamin }}"
+                                     > <i class="fa fa-wrench"></i> </button>
+                                  <button type="button" class="btn btn-icon waves-effect waves-light btn-danger delete" data-nama="{{ nama }}" data-id="{{ id }}"> <i class="fa fa-remove"></i> </button>
+                            </center>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+<!-- Add New Product Modal-->
+<form action="modul_user/create_user" method="post" enctype="multipart/form-data">
+    <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" name="nama" minlength="5" class="form-control" autocomplete="off" placeholder="Joko Akbar" required>
+                    </div>
+
+                
+                <div class="form-group">
+                    <label>No_telp</label>
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" autocomplete="off" name="no_telp" class="form-control" minlength="11" maxlength="13" placeholder="081211****" required>
+                </div>
+                   
+              
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" autocomplete="off" placeholder="Joko" required>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Tanggal Lahir</label>
+                            <div>
+                                <div class="input-group">
+                                    <input type="text" name="tgl_lahir" autocomplete="off" class="form-control" placeholder="mm/dd/yyyy" id="tgl_lahir">
+                                    <span class="input-group-addon bg-custom b-0"><i class="mdi mdi-calendar text-white"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Jenis Kelamin</label>
+                            <select class="form-control"  autocomplete="off" name="jenis_kelamin" required>
+                                <option value="cowo">Laki-Laki</option>
+                                <option value="cewe">Perempuan</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                   
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" autocomplete="off" minlength="8" class="form-control" placeholder="***" required>
+                </div>
+                    
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Role</label>
+                        <select class="form-control" autocomplete="off" name="role" required>
+                            <option value="admin">Admin</option>
+                            <option value="super_admin">Super Admin</option>
+                        </select>
+                         </div>
+                    </div>
+                
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control" autocomplete="off" name="status" required>
+                                <option value="aktif">Aktif</option>
+                                <option value="draf">Tidak Aktif</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                    
+
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-bordered waves-effect " data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-bordered waves-effect  waves-light">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Edit Product Modal-->
+<form action="master_artikel/edit_Master_artikel" method="post">
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <input type="hidden" id="id_edit">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" name="nama" id="nama_edit" minlength="5" class="form-control" autocomplete="off"
+                            placeholder="Joko Akbar" required>
+                    </div>
+            
+            
+                    <div class="form-group">
+                        <label>No_telp</label>
+                        <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                            autocomplete="off" name="no_telp" id="telp_edit" class="form-control" minlength="11" maxlength="13"
+                            placeholder="081211****" required>
+                    </div>
+            
+            
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" id="email_edit" class="form-control" autocomplete="off" placeholder="Joko" required>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Tanggal Lahir</label>
+                                <div>
+                                    <div class="input-group">
+                                        <input type="text" name="tgl_lahir" id="tgl_edit" autocomplete="off" class="form-control"
+                                            placeholder="mm/dd/yyyy" id="tgl_lahir">
+                                        <span class="input-group-addon bg-custom b-0"><i
+                                                class="mdi mdi-calendar text-white"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Jenis Kelamin</label>
+                                <select class="form-control" autocomplete="off" id="jk_edit" name="jenis_kelamin" required>
+                                    <option value="cowo">Laki-Laki</option>
+                                    <option value="cewe">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+            
+            
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" disabled name="password" autocomplete="off"  minlength="8" class="form-control"
+                            placeholder="***" required>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Role</label>
+                                <select class="form-control" autocomplete="off" id="role_edit" name="role" required>
+                                    <option value="admin">Admin</option>
+                                    <option value="super_admin">Super Admin</option>
+                                </select>
+                            </div>
+                        </div>
+            
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control" autocomplete="off" id="status_edit" name="status" required>
+                                    <option value="aktif">Aktif</option>
+                                    <option value="draf">Tidak Aktif</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-bordered waves-effect " data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-bordered waves-effect  waves-light">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<!-- Delete Product Modal-->
+<form id="add-row-form" action="modul_user/delete_user" method="post">
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Delete {{id}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <strong>Are You Sure To Delete This Data?</strong>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id_tiket" class="form-control id_tiket" required>
+                    <button type="button" class="btn btn-secondary btn-bordered waves-effect " data-dismiss="modal">Close</button>
+                     <button type="submit" class="btn btn-danger btn-bordered waves-effect  waves-light">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+</div>
+<script src="/assets/admin/js/adm/user.js"></script>
+
+{{>footer}}
